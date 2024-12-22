@@ -13,10 +13,12 @@ import About from './components/About/About.jsx'
 import ContactUs from './components/ContactUs/ContactUs.jsx'
 import Order from './components/Orders/Order.jsx'
 import CheckOut from './components/CheckOut/CheckOut.jsx'
+import NewLoginPage from './components/Login/NewLoginPage.jsx'
 
 const routes = createBrowserRouter(createRoutesFromElements(
   <Route path='/' element={<Layout />}>
     <Route index element= {<FirstPage/>}/>
+    <Route path='buyer/registerAccount' element={<NewLoginPage/>}/>
     <Route path='buyer/login' element={<LoginPage/>}/>
     <Route path='buyer/' element={<LayoutHF/>}>
       <Route index element= {<Home/>}/>

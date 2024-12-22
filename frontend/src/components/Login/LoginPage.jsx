@@ -1,34 +1,132 @@
 import React from 'react'
+import axios from 'axios';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function LoginPage() {
+
+const  NewLoginPage = ()=>{
+    const [error, setError] = useState("");
+    const [formData, setFormData] = useState({ email: "" , password: ""});
+    const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+      };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+
+        try {
+            const response = await axios.post('/api/users/loginUser', formData);
+            console.log(response.data.data);
+            alert("User logged in successfully");
+            navigate("/buyer");
+        } catch (error) {
+            setError(error.response.data.error);
+            if (error.response && error.response.status === 400) {
+                alert(error.response.data.error); // Show error to the user
+            } else {
+                alert("Something went wrong. Please try again.");
+            }
+
+        }
+
+        setLoading(false);
+    };
+
+
     return (
-        <div className=' h-screen w-screen bg-gray-900 flex justify-center items-center'>
+        <div className="flex items-center justify-center min-h-screen bg-gray-100">
+            <div className="w-full max-w-md bg-white p-8 rounded-lg shadow-md">
+                <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">Welcome Back</h2>
+                <p className="text-sm text-center text-gray-600 mb-6">
+                    Please log in to continue to your account
+                </p>
 
-
-            <form class="max-w-sm mx-auto">
-                <div class="mb-5">
-                    <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                    <input type="email" id="email" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="name@flowbite.com" required />
-                </div>
-                <div class="mb-5">
-                    <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                    <input type="password" id="password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
-                </div>
-                <div class="mb-5">
-                    <label for="repeat-password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Repeat password</label>
-                    <input type="password" id="repeat-password" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required />
-                </div>
-                <div class="flex items-start mb-5">
-                    <div class="flex items-center h-5">
-                        <input id="terms" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800" required />
+                <form className="space-y-6">
+                    {/* <!-- Email Input --> */}
+                    <div>
+                        <label for="email" className="block text-sm font-medium text-gray-700">Email</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            value={formData.email}
+                            onChange={handleInputChange}
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            required
+                        />
                     </div>
-                    <label for="terms" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a></label>
-                </div>
-                <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register new account</button>
-            </form>
 
+                    {/* <!-- Password Input --> */}
+                    <div>
+                        <label for="password" className="block text-sm font-medium text-gray-700">Password</label>
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={formData.password}
+                            onChange={handleInputChange}
+                            placeholder="Enter your password"
+                            className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                            required
+                        />
+                    </div>
+
+                    {/* <!-- Forgot Password Link --> */}
+                    <div className="text-sm">
+                        <a href="#" className="font-medium text-indigo-600 hover:text-indigo-500">
+                            Forgot your password?
+                        </a>
+                    </div>
+
+                    {/* <!-- Submit Button --> */}
+                    <button
+                        type="submit"
+                        onClick={handleSubmit}
+                        className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                    >
+                        Log In
+                    </button>
+                </form>
+
+                {/* <!-- Divider --> */}
+                <div className="mt-6 flex items-center justify-between">
+                    <span className="w-1/5 border-b border-gray-300"></span>
+                    <span className="text-sm text-gray-500">or log in with</span>
+                    <span className="w-1/5 border-b border-gray-300"></span>
+                </div>
+
+                {/* <!-- Social Login Options --> */}
+                <div className="flex space-x-4 mt-6">
+                    <button
+                        className="w-full flex items-center justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                    >
+                        <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" className="w-5 h-5 mr-2" />
+                        Google
+                    </button>
+                    <button
+                        className="w-full flex items-center justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                    >
+                        <img src="https://www.svgrepo.com/show/448261/facebook.svg" alt="Facebook" className="w-5 h-5 mr-2" />
+                        Facebook
+                    </button>
+                </div>
+
+                {/* <!-- Register Link --> */}
+                <p className="mt-6 text-center text-sm text-gray-600">
+                    Don't have an account?
+                    <a href="registerAccount" className="font-medium text-indigo-600 hover:text-indigo-500">Sign Up</a>
+                </p>
+            </div>
         </div>
     )
 }
 
-export default LoginPage
+export default NewLoginPage

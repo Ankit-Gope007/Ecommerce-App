@@ -50,7 +50,7 @@ function ContactUs() {
             <h3 className="text-2xl md:text-3xl font-semibold mb-6 text-center">Send Us a Message</h3>
             <form action="#" className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-600">
+                <label for="name" className="block text-sm font-medium text-gray-600">
                   Your Name
                 </label>
                 <input
@@ -61,7 +61,7 @@ function ContactUs() {
                 />
               </div>
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-600">
+                <label for="email" className="block text-sm font-medium text-gray-600">
                   Your Email
                 </label>
                 <input
@@ -72,7 +72,7 @@ function ContactUs() {
                 />
               </div>
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-600">
+                <label for="message" className="block text-sm font-medium text-gray-600">
                   Your Message
                 </label>
                 <textarea
