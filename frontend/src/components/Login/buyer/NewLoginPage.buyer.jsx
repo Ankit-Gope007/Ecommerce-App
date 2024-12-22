@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const LoginPage = () => {
+const B_LoginPage = () => {
     const [error, setError] = useState("");
     const [role , setRole] = useState("buyer");
     const [formData, setFormData] = useState({ name: "", email: "" , password: "", phone: "", role:`${role}`, address: "" });
@@ -25,7 +25,7 @@ const LoginPage = () => {
             const response = await axios.post('/api/users/registerUser', formData);
             console.log(response.data.data);
             alert("User registered successfully");
-            navigate("/buyer/login");
+            navigate("/login");
         } catch (error) {
             setError(error.response.data.error);
             if (error.response && error.response.status === 400) {
@@ -160,4 +160,4 @@ const LoginPage = () => {
     )
 }
 
-export default LoginPage;
+export default B_LoginPage;

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-const  NewLoginPage = ()=>{
+const  B_NewLoginPage = ()=>{
     const [error, setError] = useState("");
     const [formData, setFormData] = useState({ email: "" , password: ""});
     const [loading, setLoading] = useState(false);
@@ -129,4 +129,4 @@ const  NewLoginPage = ()=>{
     )
 }
 
-export default NewLoginPage
+export default B_NewLoginPage

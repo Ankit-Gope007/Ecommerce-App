@@ -9,10 +9,10 @@ export default function FirstPage() {
                 <p class="mb-8 text-xl font-bold text-gray-300 lg:text-xl sm:px-16 lg:px-48">You are a ..</p>
                 <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 ">
 
-                    <a href="buyer/login" class="inline-flex w-[150px] h-[40px] justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
+                    <a href="/buyer/login" class="inline-flex w-[150px] h-[40px] justify-center hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
                         Buyer
                     </a>
-                    <a href="#" class="inline-flex  justify-center w-[150px] h-[40px] hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
+                    <a href="/seller/login" class="inline-flex  justify-center w-[150px] h-[40px] hover:text-gray-900 items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
                         Seller
                     </a>
                 </div>
