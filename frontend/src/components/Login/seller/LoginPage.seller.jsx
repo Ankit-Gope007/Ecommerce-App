@@ -51,7 +51,7 @@ const  S_NewLoginPage = ()=>{
                 <form className="space-y-6">
                     {/* <!-- Email Input --> */}
                     <div>
-                        <label for="email" className="block text-sm font-medium text-gray-700">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email</label>
                         <input
                             type="email"
                             id="email"
@@ -66,7 +66,7 @@ const  S_NewLoginPage = ()=>{
 
                     {/* <!-- Password Input --> */}
                     <div>
-                        <label for="password" className="block text-sm font-medium text-gray-700">Password</label>
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">Password</label>
                         <input
                             type="password"
                             id="password"

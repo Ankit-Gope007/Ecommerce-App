@@ -19,10 +19,12 @@ app.use(cookieParser())
 
 // import routes
 import userRouter from './routes/User.route.js';
+import productRouter from './routes/Product.route.js';
 
 
 // use routes
 app.use('/api/users', userRouter);
+app.use('/api/products', productRouter);
 
 
 export { app };

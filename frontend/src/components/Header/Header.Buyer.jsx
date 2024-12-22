@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 
-function Header() {
+function B_Header() {
   return (
     <div >
       <nav className="bg-white border-gray-200 dark:bg-gray-900 w-screen">
@@ -69,5 +69,5 @@ function Header() {
   )
 }
 
-export default Header
+export default B_Header
 

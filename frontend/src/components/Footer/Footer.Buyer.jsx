@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Footer() {
+function B_Footer() {
   return (
 
 
@@ -120,4 +120,4 @@ function Footer() {
   )
 }
 
-export default Footer
+export default B_Footer

@@ -1,6 +1,6 @@
 import React from 'react'
 
-function Home() {
+function B_Home() {
   return (
     <div className='w-screen h-screen bg-red-300'>
       
@@ -8,4 +8,4 @@ function Home() {
   )
 }
 
-export default Home
+export default B_Home

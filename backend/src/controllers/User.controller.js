@@ -178,12 +178,72 @@ const logoutUser = asyncHandler(async(req,res)=>{
     .clearCookie("refreshToken",options)
     .json(new ApiResponse(200 , {} , "User Logged Out"))
 })
-// refreshToken
-// update profile
-    // update user details
-    // update password or forget password
+
+ // update profile
+  // update user details
+const updateProfile = asyncHandler(async(req,res)=>{
+    const {name,email,phone,address} = req.body
+    const user = await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set:{
+                name,
+                email,
+                phone,
+                address
+            }
+        },
+        {
+            new:true
+        }
+    )
+    if (!user) {
+        throw new ApiError(404 , "User not found")
+    }
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200 , user , "User updated successfully")
+    )
+});
+// update password or forget password
+const updatePassword = asyncHandler(async(req,res)=>{
+    const {oldPassword,newPassword} = req.body
+    const user = await User.findById(req.user._id)
+    const isPasswordValid = await user.isPasswordCorrect(oldPassword)
+    if (!isPasswordValid) {
+        throw new ApiError(401 , "Invalid Password")
+    }
+    user.password = newPassword
+    await user.save()
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200 , {} , "Password updated successfully")
+    )
+
+})
 // get current user
+
+const getCurrentUser = asyncHandler(async(req,res)=>{
+    const user = await User.findById(req.user._id).select("-password -refreshToken")
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200 , user , "User fetched successfully")
+    )
+
+})
+
 // get orderdetails
+const getOrderDetails = asyncHandler(async(req,res)=>{
+    const user = await User.findById(req.user._id).populate("orders")
+    return res
+    .status(200)
+    .json(
+        new ApiResponse(200 , user.orders , "Orders fetched successfully")
+    )
+})
 
 
 
@@ -192,6 +252,11 @@ export {
     getAllRegisteredUser,
     getByRole,
     loginUser,
-    logoutUser
+    logoutUser,
+    updateProfile,
+    updatePassword,
+    getCurrentUser,
+    getOrderDetails
+    
     
 }
