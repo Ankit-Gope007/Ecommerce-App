@@ -1,6 +1,11 @@
 import mongoose,{Schema} from "mongoose";
 
 const productSchema = new mongoose.Schema({
+    seller: {
+        type:mongoose.Schema.Types.ObjectId,
+        ref : "User",
+        required: true
+    },
     name: {
         type: String,
         required: true
@@ -13,10 +18,9 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    imageUrl: {
-        type: String,
-        required: true
-    },
+    imageUrl: { 
+        type: [String],
+        required: true },
     category: {
         type: String,
         required: true
@@ -27,7 +31,7 @@ const productSchema = new mongoose.Schema({
     },
     rating: {
         type: Number,
-        required: true
+        default: 0
     },
     reviews: [
         {
