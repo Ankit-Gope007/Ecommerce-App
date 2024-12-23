@@ -15,7 +15,7 @@ const addReview = asyncHandler(async (req, res) => {
     const {rating, comment } = req.body;
 
     // check if product exists
-    const productExists = await Product.findById(Product);
+    const productExists = await Product.findById(product);
     if (!productExists) {
         throw new ApiError(404, "Product not found");
     }
@@ -32,11 +32,64 @@ const addReview = asyncHandler(async (req, res) => {
 
 });
 // remove review
-const removeReview = asyncHandler(async (req, res) => {}  );
+const removeReview = asyncHandler(async (req, res) => {
+    // get product id from frontend
+    const {product} = req.params;
+
+    // check if product exists
+    const productExists = await Product.findById(product);
+    if (!productExists) {
+        throw new ApiError(404, "Product not found");
+    }
+
+    // check if review exists
+    const review = await Review.findOne({product:product,user:req.user._id});
+    if (!review) {
+        throw new ApiError(404, "Review not found");
+    }
+
+    await Review.findOneAndDelete({product:product,user:req.user._id});
+    return res.status(200).json(new ApiResponse(200, "Review removed successfully"));
+});
+// update review
+const updateReview = asyncHandler(async (req, res) => {
+    // get product id, rating and comment from frontend
+    const {product} = req.params;
+    const {rating, comment } = req.body;
+
+    // check if product exists
+    const productExists = await Product.findById(product);
+    if (!productExists) {
+        throw new ApiError(404, "Product not found");
+    }
+
+    // check if review exists
+    const review = await Review.findOne({product:product,user:req.user._id});
+    if (!review) {
+        throw new ApiError(404, "Review not found");
+    }
+    const updatedReview = await Review.findOneAndUpdate({product:product,user:req.user._id},{
+        rating,
+        comment
+    },{new:true});
+
+    return res.status(200).json(new ApiResponse(200, "Review updated successfully",updatedReview));
+}  );
 // get reviews
-const getReviews = asyncHandler(async (req, res) => {}  );
-// get reviews by product
-const getReviewsByProduct = asyncHandler(async (req, res) => {}  );
+const getReviews = asyncHandler(async (req, res) => {
+    // get product id from frontend
+    const {product} = req.params;
+
+    // check if product exists
+    const productExists = await Product.findById(product); 
+    if (!productExists) {
+        throw new ApiError(404, "Product not found");
+    }
+
+    const reviews = await Review.find({product:product}).populate("user");
+    return res.status(200).json(new ApiResponse(200, "Reviews fetched successfully", reviews));
+});
+
 
 
 
@@ -44,5 +97,7 @@ export  {
     addReview,
     removeReview,
     getReviews,
-    getReviewsByProduct
+
+    updateReview
+
 }
