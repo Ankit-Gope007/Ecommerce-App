@@ -32,7 +32,7 @@ router.route('/updateProduct/:id').patch(updateProduct)
 router.route('/getAllProducts').get(getAllProducts)
 router.route('/getProductById/:id').get(getProductById)
 router.route('/getProductsByCategory/:category').get(getProductsByCategory)
-router.route('/getProductsBySeller/:sellerId').get(getProductsBySeller)
+router.route('/getProductsBySeller').get(verifyJWT,getProductsBySeller)
 router.route('/getProductsByPriceRange').post(getProductsByPriceRange)
 router.route('/getProductsByRating/:rating').get(getProductsByRating)
 

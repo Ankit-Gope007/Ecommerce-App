@@ -13,8 +13,23 @@ const addProduct = asyncHandler(async (req, res) => {
     // get product details from frontend
     const { name, price, description, category, countInStock } = req.body;
 
-    if (!name || !price || !description || !category || !countInStock) {
-        throw new ApiError(400, "Please provide all details");
+    // if (!name || !price || !description || !category || !countInStock) {
+    //     throw new ApiError(400, "Please provide all details");
+    // }
+    if (!name){
+        throw new ApiError(400, "Please provide product name");
+    }
+    if (!price){
+        throw new ApiError(400, "Please provide product price");
+    }
+    if (!description){
+        throw new ApiError(400, "Please provide product description");
+    }
+    if (!category){
+        throw new ApiError(400, "Please provide product category");
+    }
+    if (!countInStock){
+        throw new ApiError(400, "Please provide product count in stock");
     }
 
     // get product images from frontend
@@ -141,7 +156,7 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
 // get products by seller
 const getProductsBySeller = asyncHandler(async (req, res) => {
     // get seller id from frontend
-    const { sellerId } = req.params;
+    const  sellerId  = req.user._id;
 
     // find products by seller id
     const products = await Product.find ({ seller: sellerId });
@@ -149,7 +164,7 @@ const getProductsBySeller = asyncHandler(async (req, res) => {
     // return success response
     return res
     .status(200)
-    .json(new ApiResponse(200, "Products", products));
+    .json(new ApiResponse(200, products,"Products by seller"));
 });
 // get products by price range
 const getProductsByPriceRange = asyncHandler(async (req, res) => {

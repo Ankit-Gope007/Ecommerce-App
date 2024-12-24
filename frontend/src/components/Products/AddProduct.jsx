@@ -1,37 +1,62 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { Cloudinary } from '@cloudinary/url-gen';
+import { auto } from '@cloudinary/url-gen/actions/resize';
+import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+import { AdvancedImage } from '@cloudinary/react';
 
+import {useNavigate} from 'react-router-dom';
 const AddProduct = () => {
+    const navigate = useNavigate()
+    const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState({
         name: "",
         price: "",
         description: "",
         category: "",
-        stock: "",
-        images: [],
+        countInStock: "",
+        imageUrl: [],
     });
 
+
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value, files } = e.target;
+        if (name === 'imageUrl') {
+            setFormData({ ...formData, imageUrl: Array.from(files) });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const productData = new FormData();
+        productData.append('name', formData.name);
+        productData.append('description', formData.description);
+        productData.append('category', formData.category);
+        productData.append('countInStock', formData.countInStock);
+        productData.append('price', formData.price);
+        formData.imageUrl.forEach((image, index) => {
+            setLoading(true);
+            productData.append(`imageUrl`, image);
+        });
         try {
-            const response = await fetch('/api/products/create', {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(formData),
+            const response = await axios.post('/api/products/addProduct', productData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+                withCredentials: true,
             });
-            const data = await response.json();
-            if (data.success) {
-                alert("Product added successfully!");
-            } else {
-                alert(data.message);
-            }
+            console.log('Product added successfully:', response.data);
+            alert('Product added successfully');
+            navigate('/seller');
+
         } catch (error) {
-            console.error(error);
+            console.error('Error adding product:', error);
+            alert('Error adding product', error);
         }
     };
+
 
     return (
         <div className="max-w-xl mx-auto p-6 bg-white shadow-md rounded-lg">
@@ -70,22 +95,17 @@ const AddProduct = () => {
                 />
                 <input
                     type="number"
-                    name="stock"
-                    value={formData.stock}
+                    name="countInStock"
+                    value={formData.countInStock}
                     onChange={handleChange}
                     placeholder="Stock"
                     className="w-full p-2 border rounded"
                 />
                 <input
                     type="file"
-                    name="images"
+                    name="imageUrl"
                     multiple
-                    onChange={(e) =>
-                        setFormData({
-                            ...formData,
-                            images: [...formData.images, ...e.target.files],
-                        })
-                    }
+                    onChange={handleChange}
                     className="w-full p-2 border rounded"
                 />
                 <button

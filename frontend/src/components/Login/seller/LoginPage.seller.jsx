@@ -29,7 +29,7 @@ const  S_NewLoginPage = ()=>{
         } catch (error) {
             setError(error.response.data.error);
             if (error.response && error.response.status === 400) {
-                alert(error.response.data.error); // Show error to the user
+                alert(error.response.data.message); // Show error to the user
             } else {
                 alert("Something went wrong. Please try again.");
             }

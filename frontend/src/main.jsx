@@ -19,6 +19,7 @@ import B_NewLoginPage from './components/Login/buyer/NewLoginPage.buyer.jsx'
 import S_LoginPage from './components/Login/seller/LoginPage.seller.jsx'
 import S_NewLoginPage from './components/Login/seller/NewLoginPage.seller.jsx'
 import AddProduct from './components/Products/AddProduct.jsx'
+import ViewProduct from './components/Products/ViewProduct.jsx'
 
 
 const routes = createBrowserRouter(createRoutesFromElements(
@@ -39,6 +40,7 @@ const routes = createBrowserRouter(createRoutesFromElements(
     <Route path='seller/' element={<S_LayoutHF />}>
       <Route index element={<S_Home />} />
       <Route path='add-product' element={<AddProduct />} />
+      <Route path='view-product' element={<ViewProduct />} />
 
     </Route>
   </Route>
@@ -46,7 +48,7 @@ const routes = createBrowserRouter(createRoutesFromElements(
 
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  // <StrictMode>
     <RouterProvider router={routes} />
-  </StrictMode>,
+  //  </StrictMode>, 
 )

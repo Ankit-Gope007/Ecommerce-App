@@ -16,7 +16,8 @@ const S_Home = () => {
                 <div className="bg-white shadow-md rounded-lg p-6 text-center">
                     <h3 className="text-xl font-bold">Manage Products</h3>
                     <p className="text-gray-600 mt-2">View, edit, or delete your existing products.</p>
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600">
+                    <button className="bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600"
+                    onClick={(e) => {navigate('/seller/view-product')}}>
                         View Products
                     </button>
                 </div>

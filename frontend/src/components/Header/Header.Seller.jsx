@@ -14,7 +14,7 @@ const S_Header = () => {
 
                 {/* Navigation Links */}
                 <nav className="space-x-6">
-                    <Link to="/seller/my-products" className="hover:text-blue-400">
+                    <Link to="/seller/view-product" className="hover:text-blue-400">
                         My Products
                     </Link>
                     <Link to="/seller/add-product" className="hover:text-blue-400">

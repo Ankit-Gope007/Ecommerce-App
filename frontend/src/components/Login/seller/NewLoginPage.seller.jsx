@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const S_LoginPage = () => {
     const [error, setError] = useState("");
-    const [role , setRole] = useState("buyer");
+    const [role , setRole] = useState("seller");
     const [formData, setFormData] = useState({ name: "", email: "" , password: "", phone: "", role:`${role}`, address: "" });
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ const S_LoginPage = () => {
             navigate("/seller/login");
         } catch (error) {
             setError(error.response.data.error);
-            if (error.response && error.response.status === 400) {
+            if (error.response && error.response.status === 401) {
                 alert(error.response.data.error); // Show error to the user
             } else {
                 alert("Something went wrong. Please try again.");
