@@ -86,7 +86,7 @@ const AddProduct = () => {
                     className="w-full p-2 border rounded"
                 />
                 <input
-                    type="text"
+                    type="option"
                     name="category"
                     value={formData.category}
                     onChange={handleChange}
