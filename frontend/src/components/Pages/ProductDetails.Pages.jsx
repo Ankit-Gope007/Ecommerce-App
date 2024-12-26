@@ -70,8 +70,8 @@ const ProductDetails_Pages = () => {
 
 
         <>
-            <div class="max-w-7xl mx-auto p-6">
-                <div class="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="max-w-7xl mx-auto p-6">
+                <div className="flex flex-col md:flex-row bg-white shadow-lg rounded-lg overflow-hidden">
 
 
                     <div className="md:w-1/4 w-full relative h-[500px] md:h-auto ">
@@ -90,19 +90,19 @@ const ProductDetails_Pages = () => {
                         </button>
                     </div>
 
-                    <div class="md:w-1/2 p-6 flex flex-col justify-between">
-                        <h2 class="text-3xl font-semibold text-gray-800">{product.name}</h2>
-                        <p class="text-lg text-gray-600 mt-2">{product.description}</p>
+                    <div className="md:w-1/2 p-6 flex flex-col justify-between">
+                        <h2 className="text-3xl font-semibold text-gray-800">{product.name}</h2>
+                        <p className="text-lg text-gray-600 mt-2">{product.description}</p>
 
 
-                        <div class="flex items-center mt-4">
-                            <p class="text-2xl font-bold text-gray-800">₹{product.price}</p>
+                        <div className="flex items-center mt-4">
+                            <p className="text-2xl font-bold text-gray-800">₹{product.price}</p>
                         </div>
 
 
-                        <div class="flex items-center mt-4">
-                            <label for="quantity" class="text-lg text-gray-700">Quantity:</label>
-                            <input type="number" id="quantity" name="quantity" value="1" min="1" class="w-16 ml-4 py-2 px-3 border border-gray-300 rounded-md" />
+                        <div className="flex items-center mt-4">
+                            <label for="quantity" className="text-lg text-gray-700">Quantity:</label>
+                            <input type="number" id="quantity" name="quantity" value="1" min="1" className="w-16 ml-4 py-2 px-3 border border-gray-300 rounded-md" />
                         </div>
 
                         <div>
@@ -121,21 +121,21 @@ const ProductDetails_Pages = () => {
                         </div>
 
 
-                        <div class="mt-6">
+                        <div className="mt-6">
                             <button
                                 onClick={addReview}
-                                class="w-[43%] m-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition duration-200">Add a Review</button>
+                                className="w-[43%] m-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition duration-200">Add a Review</button>
                             <button
                                 onClick={addToCart}
-                                class="w-[43%] m-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition duration-200">Add to Cart</button>
+                                className="w-[43%] m-4 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md transition duration-200">Add to Cart</button>
                         </div>
                     </div>
                 </div>
 
 
-                <div class="mt-8">
-                    <h3 class="text-xl font-semibold text-gray-800">Product Details</h3>
-                    <div class="mt-4 text-gray-600">
+                <div className="mt-8">
+                    <h3 className="text-xl font-semibold text-gray-800">Product Details</h3>
+                    <div className="mt-4 text-gray-600">
                         <p>Here you can display additional information such as product specifications, materials, etc. This section can have multiple paragraphs or even bullet points for easy readability.</p>
                     </div>
                 </div>

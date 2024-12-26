@@ -7,7 +7,7 @@ const router = Router();
 
 router.route("/addToCart/:productID").post(verifyJWT, addToCart); 
 router.route("/getOrders").get(verifyJWT, getOrders);
-router.route("/deleteOrder").delete(verifyJWT, deleteOrder);
+router.route("/deleteOrder/:productID").delete(verifyJWT, deleteOrder);
 
 
 export default router;

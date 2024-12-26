@@ -62,7 +62,7 @@ const getOrders = asyncHandler(async (req, res, next) => {
 });
 
 const deleteOrder = asyncHandler(async (req, res, next) => {
-    const {productID} = req.body;
+    const {productID} = req.params;
     const order = await Order.findOne({user:req.user._id}).populate("products.product");
     const product = order.products.find(p =>String(p._id) === String(productID));
     if (!product){

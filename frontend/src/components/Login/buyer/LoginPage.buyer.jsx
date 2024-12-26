@@ -96,28 +96,7 @@ const  B_NewLoginPage = ()=>{
                     </button>
                 </form>
 
-                {/* <!-- Divider --> */}
-                <div className="mt-6 flex items-center justify-between">
-                    <span className="w-1/5 border-b border-gray-300"></span>
-                    <span className="text-sm text-gray-500">or log in with</span>
-                    <span className="w-1/5 border-b border-gray-300"></span>
-                </div>
 
-                {/* <!-- Social Login Options --> */}
-                <div className="flex space-x-4 mt-6">
-                    <button
-                        className="w-full flex items-center justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                    >
-                        <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google" className="w-5 h-5 mr-2" />
-                        Google
-                    </button>
-                    <button
-                        className="w-full flex items-center justify-center py-2 px-4 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                    >
-                        <img src="https://www.svgrepo.com/show/448261/facebook.svg" alt="Facebook" className="w-5 h-5 mr-2" />
-                        Facebook
-                    </button>
-                </div>
 
                 {/* <!-- Register Link --> */}
                 <p className="mt-6 text-center text-sm text-gray-600">
