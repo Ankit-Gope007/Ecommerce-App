@@ -20,6 +20,7 @@ import S_LoginPage from './components/Login/seller/LoginPage.seller.jsx'
 import S_NewLoginPage from './components/Login/seller/NewLoginPage.seller.jsx'
 import AddProduct from './components/Products/AddProduct.jsx'
 import ViewProduct from './components/Products/ViewProduct.jsx'
+import UpdateProduct from './components/Update/Product.update.jsx'
 
 
 const routes = createBrowserRouter(createRoutesFromElements(
@@ -41,6 +42,7 @@ const routes = createBrowserRouter(createRoutesFromElements(
       <Route index element={<S_Home />} />
       <Route path='add-product' element={<AddProduct />} />
       <Route path='view-product' element={<ViewProduct />} />
+      <Route path='updateProduct/:id' element={<UpdateProduct />} />
 
     </Route>
   </Route>

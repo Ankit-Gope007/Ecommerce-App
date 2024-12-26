@@ -24,12 +24,17 @@ const ViewProduct = () => {
     }
   }, [])
 
+
+
+
+
   return (<>
     <div className='grid grid-cols-2'>
       {
         products.map((product) => (
           <div >
             <S_Card key={product._id} 
+              _id={product._id}
               name={product.name}
               category={product.category}
               price={product.price}

@@ -1,8 +1,23 @@
 import React from 'react'
+import {useNavigate} from 'react-router-dom'
+import axios from 'axios'
+import { useEffect } from 'react'
 
-const S_Card = ({name,price,description,category,countInStock,imageUrl}) => {
+const S_Card = ({_id,name,price,description,category,countInStock,imageUrl}) => {
+    const navigate = useNavigate()
+    const editProduct = () => {
+        navigate(`/seller/updateProduct/${_id}`)
+    }
+    const deleteProduct = async() => {
+            if (confirm('Are you sure you want to delete this product?')) {
+                await axios.delete(`/api/products/deleteProduct/${_id}`);
+                document.querySelector(`div[data-id="${_id}"]`).remove();
+                location.reload();
+            }
+        };
+        
     return (
-        <div className="bg-gray-80 shadow-xl max-w-full m-5 rounded-lg h-[295px] flex " >
+        <div className="bg-gray-80 shadow-xl max-w-full m-5 rounded-lg h-[295px] flex " data-id={_id} >
             <div className="w-[30%] h-[250px] m-5 rounded-lg overflow-hidden ">
                 <img src={imageUrl} className="w-full h-full object-cover" />
             </div>
@@ -12,8 +27,12 @@ const S_Card = ({name,price,description,category,countInStock,imageUrl}) => {
                 <p className='text-xl pl-5'>Description: {description}</p>
                 <p className='text-xl pl-5'>Category: {category}</p>
                 <p className='text-xl pl-5'>Stock: {countInStock}</p>
-                <button className='bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 ml-5'>Edit Product</button>
-
+                <button className='bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 ml-5'
+                onClick={editProduct}>
+                Edit Product</button>
+                <button className='bg-blue-500 text-white px-4 py-2 rounded mt-4 hover:bg-blue-600 ml-5'
+                onClick={deleteProduct}
+                >Delete Product</button>
             </div>
         </div>
     )
