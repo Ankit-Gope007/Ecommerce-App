@@ -12,7 +12,7 @@ const addToCart = asyncHandler(async (req, res, next) => {
     const userID = req.user._id;
     const user = await User.findById(userID);
     // find product id
-    const { productID } = req.body
+    const { productID } = req.params;
 
     // check if product exists
     const product = await Product.findById(productID);

@@ -5,7 +5,7 @@ import  {verifyJWT} from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
-router.route("/addToCart").post(verifyJWT, addToCart); 
+router.route("/addToCart/:productID").post(verifyJWT, addToCart); 
 router.route("/getOrders").get(verifyJWT, getOrders);
 router.route("/deleteOrder").delete(verifyJWT, deleteOrder);
 

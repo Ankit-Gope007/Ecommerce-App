@@ -1,10 +1,11 @@
 import React from 'react'
+import Card_Home_Category from '../Cards/Card.Home.Category'
 
 function B_Home() {
   return (
-    <div className='w-screen h-screen bg-red-300'>
-      
-    </div>
+    <>
+      <Card_Home_Category />
+    </>
   )
 }
 

@@ -21,6 +21,14 @@ import S_NewLoginPage from './components/Login/seller/NewLoginPage.seller.jsx'
 import AddProduct from './components/Products/AddProduct.jsx'
 import ViewProduct from './components/Products/ViewProduct.jsx'
 import UpdateProduct from './components/Update/Product.update.jsx'
+import Clothes_Pages from './components/Pages/Clothes.Pages.jsx'
+import ProductDetails_Pages from './components/Pages/ProductDetails.Pages.jsx'
+import Toys_Pages from './components/Pages/Toys.Pages.jsx'
+import Kitchen_Pages from './components/Pages/Kitchen.Pages.jsx'
+import Tools_Pages from './components/Pages/Tools.Pages.jsx'
+import HomeDecore_Pages from './components/Pages/HomeDecore.Pages.jsx'
+import Books_Pages from './components/Pages/Books.Pages.jsx'
+import AddReview from './components/Pages/AddReview.jsx'
 
 
 const routes = createBrowserRouter(createRoutesFromElements(
@@ -30,11 +38,18 @@ const routes = createBrowserRouter(createRoutesFromElements(
     <Route path='buyer/login' element={<B_LoginPage />} />
     <Route path='buyer/' element={<B_LayoutHF />}>
       <Route index element={<B_Home />} />
-      <Route path='new-arrivals' element={<NewArrivals />} />
+      <Route path='Clothes/' element={<Clothes_Pages />}/>
+      <Route path='Toys/' element={<Toys_Pages />}/>
+      <Route path='Kitchen/' element={<Kitchen_Pages />}/>
+      <Route path='Tools/' element={<Tools_Pages />}/>
+      <Route path='HomeDecore/' element={<HomeDecore_Pages />}/>
+      <Route path='Books/' element={<Books_Pages />}/>
+      <Route path='add-review/:product' element={<AddReview />} />
+
+      <Route path='product/:id' element={<ProductDetails_Pages />} />
       <Route path='about' element={<About />} />
       <Route path='contact-us' element={<ContactUs />} />
       <Route path='orders' element={<Order />} />
-      <Route path='checkout' element={<CheckOut />} />
     </Route>
     <Route path='seller/registerAccount' element={<S_NewLoginPage />} />
     <Route path='seller/login' element={<S_LoginPage />} />
@@ -51,6 +66,6 @@ const routes = createBrowserRouter(createRoutesFromElements(
 
 createRoot(document.getElementById('root')).render(
   // <StrictMode>
-    <RouterProvider router={routes} />
+  <RouterProvider router={routes} />
   //  </StrictMode>, 
 )

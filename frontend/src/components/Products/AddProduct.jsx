@@ -30,6 +30,7 @@ const AddProduct = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setLoading(true);
         const productData = new FormData();
         productData.append('name', formData.name);
         productData.append('description', formData.description);
@@ -54,6 +55,8 @@ const AddProduct = () => {
         } catch (error) {
             console.error('Error adding product:', error);
             alert('Error adding product', error);
+        }finally {
+            setLoading(false);
         }
     };
 
@@ -111,8 +114,9 @@ const AddProduct = () => {
                 <button
                     type="submit"
                     className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                    disabled={loading}
                 >
-                    Add Product
+                   {loading ? 'Uploading...' : 'Add Product'}
                 </button>
             </form>
         </div>

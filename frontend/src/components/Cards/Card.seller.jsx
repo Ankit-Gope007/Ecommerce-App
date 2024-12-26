@@ -17,7 +17,7 @@ const S_Card = ({_id,name,price,description,category,countInStock,imageUrl}) => 
         };
         
     return (
-        <div className="bg-gray-80 shadow-xl max-w-full m-5 rounded-lg h-[295px] flex " data-id={_id} >
+        <div className="bg-gray-80 shadow-xl max-w-full m-5 rounded-lg min-h-[350px] flex  " data-id={_id} >
             <div className="w-[30%] h-[250px] m-5 rounded-lg overflow-hidden ">
                 <img src={imageUrl} className="w-full h-full object-cover" />
             </div>

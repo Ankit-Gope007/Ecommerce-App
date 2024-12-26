@@ -25,7 +25,7 @@ const B_LoginPage = () => {
             const response = await axios.post('/api/users/registerUser', formData);
             console.log(response.data.data);
             alert("User registered successfully");
-            navigate("/login");
+            navigate("/buyer/login");
         } catch (error) {
             setError(error.response.data.error);
             if (error.response && error.response.status === 400) {

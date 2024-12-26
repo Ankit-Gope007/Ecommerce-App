@@ -1,7 +1,24 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import axios from "axios";
+
 
 const S_Header = () => {
+    const navigate = useNavigate();
+    const Logout = async () => {
+        const userConfirm = confirm("Are you sure you want to logout?");
+        if (userConfirm){
+            const response = await axios.post("/api/users/logoutUser", {
+                withCredentials: true,
+            });
+            if (response.status === 200) {
+                navigate("/seller/login");
+            } else {
+                alert("Error logging out. Please try again.");
+            }
+        }
+        
+    };
     return (
         <header className="bg-gray-800 text-white shadow-md">
             <div className="container mx-auto flex justify-between items-center py-4 px-6">
@@ -27,7 +44,9 @@ const S_Header = () => {
 
                 {/* Profile/Logout */}
                 <div>
-                    <button className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600">
+                    <button className="bg-blue-500 px-4 py-2 rounded hover:bg-blue-600"
+                    onClick={Logout}
+                    >
                         Logout
                     </button>
                 </div>
