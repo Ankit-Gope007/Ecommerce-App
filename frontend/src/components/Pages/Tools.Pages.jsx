@@ -9,7 +9,7 @@ const Tools_Pages = () => {
     useEffect(() => {
         try {
             const fetchProducts = async () => {
-                const response = await axios.get(`/api/products/getProductsByCategory/Tools`)
+                const response = await axios.get(`https://ecommerce-app-backend-blgm.onrender.com/api/products/getProductsByCategory/Tools`)
                 // console.log(response.data.message)
                 // console.log(Array.isArray(response.data.message))
                 setProducts(response.data.message)
