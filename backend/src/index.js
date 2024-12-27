@@ -4,6 +4,7 @@ import {DB_NAME} from "./constants.js";
 import connectDB from "./db/index.js";
 import { app } from "./app.js";
 
+const PORT = process.env.PORT || 8000
 
 
 
@@ -15,7 +16,7 @@ dotenv.config({
 connectDB()
 .then(() => { 
     try {
-        app.listen(process.env.PORT||8000)
+        app.listen(PORT);
         console.log(`Server is listening on port ${process.env.PORT}` );
     } catch (error) {
         app.on("error",(error) => {
