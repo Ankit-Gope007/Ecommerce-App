@@ -57,7 +57,7 @@ const AddReview = () => {
 
 
                     
-                        <label for="rating" className="block text-lg font-semibold text-gray-700">Rating (1 to 5):</label>
+                        <label htmlFor="rating" className="block text-lg font-semibold text-gray-700">Rating (1 to 5):</label>
                         <input
                             type="number"
                             id="rating"
@@ -72,7 +72,7 @@ const AddReview = () => {
 
 
                     
-                        <label for="comment" className="block text-lg font-semibold text-gray-700">Comments:</label>
+                        <label htmlFor="comment" className="block text-lg font-semibold text-gray-700">Comments:</label>
                         <textarea
                             id="comment"
                             name="comment"

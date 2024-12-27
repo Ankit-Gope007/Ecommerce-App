@@ -101,7 +101,7 @@ const ProductDetails_Pages = () => {
 
 
                         <div className="flex items-center mt-4">
-                            <label for="quantity" className="text-lg text-gray-700">Quantity:</label>
+                            <label htmlFor="quantity" className="text-lg text-gray-700">Quantity:</label>
                             <input type="number" id="quantity" name="quantity" value="1" min="1" className="w-16 ml-4 py-2 px-3 border border-gray-300 rounded-md" />
                         </div>
 
