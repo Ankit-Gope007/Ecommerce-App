@@ -5,7 +5,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import jwt from "jsonwebtoken";
 import { Product } from "../models/Product.model.js";
-import { Review } from "../models/Review.model.js";
+import { Review } from "../models/review.model.js";
 
 
 // add review
