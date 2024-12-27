@@ -9,7 +9,7 @@ const Books_Pages = () => {
     useEffect(() => {
         try {
             const fetchProducts = async () => {
-                const response = await axios.get(`https://ecommerce-app-backend-blgm.onrender.com//api/products/getProductsByCategory/Books`)
+                const response = await axios.get(`https://ecommerce-app-backend-blgm.onrender.com/api/products/getProductsByCategory/Books`)
                 // console.log(response.data.message)
                 // console.log(Array.isArray(response.data.message))
                 setProducts(response.data.message)
