@@ -22,7 +22,7 @@ const B_LoginPage = () => {
         setError("");
 
         try {
-            const response = await axios.post('/api/users/registerUser', formData);
+            const response = await axios.post('https://ecommerce-app-backend-blgm.onrender.com/api/users/registerUser', formData);
             console.log(response.data.data);
             alert("User registered successfully");
             navigate("/buyer/login");
