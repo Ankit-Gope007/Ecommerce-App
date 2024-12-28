@@ -18,7 +18,7 @@ const UpdateProduct = () => {
         const fetchProduct = async () => {
             setLoading(true);
             try {
-                const { data } = await axios.get(`https://ecommerce-app-backend-blgm.onrender.com/api/products/getProductById/${id}`);
+                const { data } = await axios.get(`/api/products/getProductById/${id}`);
                 setFormData({
                     name: data.name,
                     price: data.price,
