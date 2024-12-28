@@ -7,7 +7,7 @@ const app = express();
 
 
 app.use(cors({
-  origin:'https://ecommerce-app-1zdy.vercel.app',
+  origin:'*',
   credentials: true,  // If you're using cookies/sessions
 }));
 
