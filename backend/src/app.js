@@ -7,7 +7,7 @@ const app = express();
 
 
 app.use(cors({
-  origin:'*',
+  origin:'https://ecommerce-app-frontend-9xi0.onrender.com',
   credentials: true,  // If you're using cookies/sessions
 }));
 
