@@ -27,7 +27,7 @@ const AddReview = () => {
     
         try {
             const response = await axios.post(
-                `https://ecommerce-app-backend-blgm.onrender.com/api/reviews/addReview/${product}`, 
+                `/api/reviews/addReview/${product}`, 
                 { rating: formData.rating, comment: formData.comment },
                 { withCredentials: true }
             );
