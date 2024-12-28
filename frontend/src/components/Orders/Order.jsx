@@ -13,7 +13,7 @@ function Order() {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('https://ecommerce-app-backend-blgm.onrender.com/api/orders/getOrders',
+        const response = await axios.get('/api/orders/getOrders',
           { withCredentials: true }
         );
         setOrders(response.data.message[0]);
