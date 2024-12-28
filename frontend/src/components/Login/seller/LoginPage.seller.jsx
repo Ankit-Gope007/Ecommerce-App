@@ -22,7 +22,7 @@ const  S_NewLoginPage = ()=>{
         setError("");
 
         try {
-            const response = await axios.post('https://ecommerce-app-backend-blgm.onrender.com/api/users/loginUser', formData);
+            const response = await axios.post('/api/users/loginUser', formData);
             console.log(response.data.data);
             alert("User logged in successfully");
             navigate("/seller");
