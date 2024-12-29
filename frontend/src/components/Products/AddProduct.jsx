@@ -42,7 +42,7 @@ const AddProduct = () => {
             productData.append(`imageUrl`, image);
         });
         try {
-            const response = await axios.post('/api/products/addProduct', productData, {
+            const response = await axios.post('https://ecommerce-app-backend-blgm.onrender.com/api/products/addProduct', productData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                 },
