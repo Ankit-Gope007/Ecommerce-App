@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: "https://ecommerce-app-backend-blgm.onrender.com", 
+        target: "https://ecommerce-app-backend-kyd3.onrender.com", 
       }
     }
   },  
