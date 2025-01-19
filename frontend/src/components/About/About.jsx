@@ -56,7 +56,7 @@ function About() {
             {["Ankit Gope"].map((member, index) => (
               <div key={index} className="bg-white shadow-lg p-6 rounded-lg w-[250px]">
                 <img
-                  src={`https://media.licdn.com/dms/image/v2/D4E35AQHI1SavPPR-GQ/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1728413204436?e=1735200000&v=beta&t=20_r88MBugaCAwEY_pMqQ3SP9Fb1Az_zpjMyU_O3nuQ`}
+                  src={`https://media.licdn.com/dms/image/v2/D4E35AQF8yXWFN_ut4Q/profile-framedphoto-shrink_400_400/profile-framedphoto-shrink_400_400/0/1735621132204?e=1737900000&v=beta&t=UGjfqtBCTUfbfTMFqU5FjSNUQ6rlhxREzhG0WFfNwJw`}
                   alt={member}
                   
                   className="w-24 h-24 rounded-full mx-auto mb-4"
