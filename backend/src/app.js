@@ -11,8 +11,11 @@ app.use(express.static("public"))
 app.use(cookieParser())
 
 app.use(cors({
-  origin:'https://ecommerce-app-frontend-9xi0.onrender.com',
-  credentials: true,  // If you're using cookies/sessions
+    origin: 'https://ecommerce-app-frontend-9xi0.onrender.com',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    exposedHeaders: ['set-cookie']
 }));
 
 app.use((req, res, next) => {
