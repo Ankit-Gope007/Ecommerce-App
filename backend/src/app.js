@@ -11,6 +11,12 @@ app.use(cors({
   credentials: true,  // If you're using cookies/sessions
 }));
 
+app.use((req, res, next) => {
+  console.log('Cookies received:', req.cookies);
+  console.log('Headers:', req.headers);
+  next();
+});
+
 
 app.use(express.json({limit : "16kb"}))
 app.use(express.urlencoded({extended:true,limit : "16kb"}))
