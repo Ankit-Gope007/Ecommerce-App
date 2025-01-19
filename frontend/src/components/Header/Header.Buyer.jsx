@@ -11,6 +11,9 @@ function B_Header() {
     if (userConfirm) {
       const response = await axios.post("https://ecommerce-app-backend-kyd3.onrender.com/api/users/logoutUser", {
         withCredentials: true,
+                headers: {
+          "Content-Type": "application/json",
+        },
       });
       if (response.status === 200) {
         navigate("/");
