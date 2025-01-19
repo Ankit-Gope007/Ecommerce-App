@@ -93,69 +93,63 @@ const getByRole = asyncHandler(async (req,res) => {
 })
 // login
 const loginUser = asyncHandler(async (req, res) => {
-    // req.body -> get the data
-    // take username or email
-    // find the user
-    // if found check password
-    // access and refresh token
-    // send cookies
-
-    // req.body -> get the data
+    const { email, password } = req.body;
     
-    const { email, password } = req.body
-
-    
-
-
-    // take username or email
-    if (!password && !email) {
-        throw new ApiError(400, "Password or Email required")
+    if (!password || !email) {
+        throw new ApiError(400, "Password and Email required");
     }
-
-    // find the user
-    const user = await User.findOne({email:email})
+    
+    const user = await User.findOne({ email });
     if (!user) {
-        throw new ApiError(404, "No User found with this email")
+        throw new ApiError(404, "No User found with this email");
     }
-
-    // if found check password
     
-   
-    const isPasswordValid = await user.isPasswordCorrect(password)
+    const isPasswordValid = await user.isPasswordCorrect(password);
     if (!isPasswordValid) {
-        throw new ApiError(401, "Invalid User credentials ")
+        throw new ApiError(401, "Invalid User credentials");
     }
-
-    // access and refresh token
-    const {accessToken,refreshToken}= await generateAccessAndRefreshToken(user._id)
-
-    // send cookies
+    
+    const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id);
+    
     const loggedInUser = await User.findById(user._id)
-    .select("-password -refreshToken")
+        .select("-password -refreshToken");
 
+    // Modified cookie options for Render
     const options = {
-        httpOnly:true,
-        secure:true,
-          sameSite: 'none',  // Critical for cross-site requests
-  domain: '.onrender.com',  // Try this if the above doesn't work
+        httpOnly: true,
+        secure: true,
+        sameSite: 'none',
+        maxAge: 24 * 60 * 60 * 1000, // 24 hours
+        path: '/'  // Add this
+    };
+
+    // Add debugging logs
+    console.log("Setting cookies with options:", options);
+    console.log("Access Token:", accessToken);
+    
+    try {
+        res.cookie("accessToken", accessToken, options);
+        res.cookie("refreshToken", refreshToken, options);
+        
+        console.log("Cookies set. Response headers:", res.getHeaders());
+        
+        return res.status(200).json(
+            new ApiResponse(
+                200,
+                {
+                    user: loggedInUser,
+                    accessToken,
+                    refreshToken
+                },
+                "User logged in successfully"
+            )
+        );
+    } catch (error) {
+        console.error("Error setting cookies:", error);
+        throw error;
     }
-    return res
-    .status(200)
-    .cookie("accessToken",accessToken ,options)
-    .cookie("refreshToken",refreshToken,options)
-    .json(
-        new ApiResponse(
-            200,
-            {
-                user: loggedInUser , accessToken,
-                refreshToken
-            },
-            "User logged in successfully"
-        )
-    )
+});
 
-
-})
 // logout
 const logoutUser = asyncHandler(async(req,res)=>{
     await User.findByIdAndUpdate(
