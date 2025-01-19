@@ -5,6 +5,10 @@ import cookieParser from 'cookie-parser';
 
 const app = express();
 
+app.use(express.json({limit : "16kb"}))
+app.use(express.urlencoded({extended:true,limit : "16kb"}))
+app.use(express.static("public"))
+app.use(cookieParser())
 
 app.use(cors({
   origin:'https://ecommerce-app-frontend-9xi0.onrender.com',
@@ -18,10 +22,6 @@ app.use((req, res, next) => {
 });
 
 
-app.use(express.json({limit : "16kb"}))
-app.use(express.urlencoded({extended:true,limit : "16kb"}))
-app.use(express.static("public"))
-app.use(cookieParser())
 
 // import routes
 import userRouter from './routes/User.route.js';
