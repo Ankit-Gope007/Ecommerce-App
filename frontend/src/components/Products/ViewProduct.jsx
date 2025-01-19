@@ -7,7 +7,7 @@ const ViewProduct = () => {
   useEffect(() => {
     try {
       const fetchProducts = async () => {
-        const response = await axios.get('https://ecommerce-app-backend-blgm.onrender.com/api/products/getProductsBySeller', {
+        const response = await axios.get('https://ecommerce-app-backend-kyd3.onrender.com/api/products/getProductsBySeller', {
           // Include cookies in the request
           withCredentials: true,
         })
