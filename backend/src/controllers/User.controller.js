@@ -136,6 +136,8 @@ const loginUser = asyncHandler(async (req, res) => {
     const options = {
         httpOnly:true,
         secure:true,
+          sameSite: 'none',  // Critical for cross-site requests
+  domain: '.onrender.com',  // Try this if the above doesn't work
     }
     return res
     .status(200)
@@ -170,6 +172,8 @@ const logoutUser = asyncHandler(async(req,res)=>{
     const options = {
         httpOnly:true,
         secure:true,
+          sameSite: 'none',  // Critical for cross-site requests
+  domain: '.onrender.com',  // Try this if the above doesn't work
     }
 
     return res
