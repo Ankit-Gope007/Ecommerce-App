@@ -17,8 +17,8 @@ const ProductDetails_Pages = () => {
     useEffect(() => {
         const fetchProduct = async () => {
             try {
-                const response = await axios.get(`https://ecommerce-app-backend-blgm.onrender.com/api/products/getProductById/${id}`);
-                const reviews = await axios.get(`https://ecommerce-app-backend-blgm.onrender.com/api/reviews/getReviews/${id}`);
+                const response = await axios.get(`https://ecommerce-app-backend-kyd3.onrender.com/api/products/getProductById/${id}`);
+                const reviews = await axios.get(`https://ecommerce-app-backend-kyd3.onrender.com/api/reviews/getReviews/${id}`);
                 setReview(reviews.data.message)
                 setProduct(response.data.message);
                 setLoading(false);
