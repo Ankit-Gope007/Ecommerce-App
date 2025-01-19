@@ -9,7 +9,7 @@ function B_Header() {
   const Logout = async () => {
     const userConfirm = confirm("Are you sure you want to logout?");
     if (userConfirm) {
-      const response = await axios.post("/api/users/logoutUser", {
+      const response = await axios.post("https://ecommerce-app-backend-kyd3.onrender.com/api/users/logoutUser", {
         withCredentials: true,
       });
       if (response.status === 200) {
