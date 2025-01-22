@@ -50,7 +50,10 @@ const AddProduct = () => {
             //     },
             //     withCredentials: true,
             // });
-            const response = await api.post('/api/products/addProduct', productData);
+            const response = await api.post('/api/products/addProduct', productData,{
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                }});
             console.log('Product added successfully:', response.data);
             alert('Product added successfully');
             navigate('/seller');
