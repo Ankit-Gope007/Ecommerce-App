@@ -4,6 +4,7 @@ import { Cloudinary } from '@cloudinary/url-gen';
 import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import { AdvancedImage } from '@cloudinary/react';
+import api from '../../api.config.js'
 
 import {useNavigate} from 'react-router-dom';
 const AddProduct = () => {
@@ -42,12 +43,16 @@ const AddProduct = () => {
             productData.append(`imageUrl`, image);
         });
         try {
-            const response = await axios.post('https://ecommerce-app-backend-kyd3.onrender.com/api/products/addProduct', productData, {
+            // const response = await axios.post('https://ecommerce-app-backend-kyd3.onrender.com/api/products/addProduct', productData, {
+            //     headers: {
+            //         'Content-Type': 'multipart/form-data',
+            //     },
+            //     withCredentials: true,
+            // });
+            const response = await api.post('/api/products/addProduct', productData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
-                },
-                withCredentials: true,
-            });
+                });
             console.log('Product added successfully:', response.data);
             alert('Product added successfully');
             navigate('/seller');
