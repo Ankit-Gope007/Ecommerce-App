@@ -10,21 +10,18 @@ import {
     getProductsByPriceRange,
     getProductsByRating
 } from "../controllers/Product.controller.js";
-import {upload} from "../middlewares/multer.middleware.js"
+// import {upload} from "../middlewares/multer.middleware.js"
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import multer from "multer";
+
+const upload = multer({ storage: multer.memoryStorage() });
 
 
 const router = Router();
 
 
 router.route('/addProduct').post(
-    upload.fields([
-        {
-            name:'imageUrl',
-            maxCount:4
-        }
-    ]),
+ upload.fields([{ name: 'imageUrl', maxCount: 4 }]),
     verifyJWT,
     addProduct)
 router.route('/deleteProduct/:id').delete(deleteProduct)
