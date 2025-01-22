@@ -38,8 +38,9 @@ function Order() {
     try {
       const userConfirm = confirm('Do you want to remove this product from cart?');
       if (userConfirm) {
-        const response = await axios.delete(`/api/orders/deleteOrder/${productId}`, 
-          { withCredentials: true });
+        // const response = await axios.delete(`/api/orders/deleteOrder/${productId}`, 
+        //   { withCredentials: true });
+        const response = await api.post(`/api/orders/deleteOrder/${productId}`);
         console.log(response.data.message);
         alert('Product removed from cart');
         // Update the state to remove the product from the list
