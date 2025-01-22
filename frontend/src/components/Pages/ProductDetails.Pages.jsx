@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import api from '../../api.config.js'
 
 
 
@@ -53,9 +54,10 @@ const ProductDetails_Pages = () => {
         try {
             const userConfirm = confirm('Do you want to add this product to cart?');
             if (userConfirm) {
-                const response = await axios.post(`/api/orders/addToCart/${id}`,
-                   { withCredentials: true }
-                );
+                // const response = await axios.post(`/api/orders/addToCart/${id}`,
+                //    { withCredentials: true }
+                // );
+                  const response = await api.post(`/api/orders/addToCart/${id}`);
                 console.log(response.data.message);
                 alert('Product added to cart');
 
