@@ -5,7 +5,7 @@ import { auto } from '@cloudinary/url-gen/actions/resize';
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
 import { AdvancedImage } from '@cloudinary/react';
 import api from '../../api.config.js'
-import apip from '../../api.config.js'
+
 
 import {useNavigate} from 'react-router-dom';
 const AddProduct = () => {
@@ -50,7 +50,7 @@ const AddProduct = () => {
             //     },
             //     withCredentials: true,
             // });
-            const response = await apip.post('/api/products/addProduct', productData);
+            const response = await api.post('/api/products/addProduct', productData);
             console.log('Product added successfully:', response.data);
             alert('Product added successfully');
             navigate('/seller');
