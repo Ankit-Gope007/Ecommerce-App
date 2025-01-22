@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import S_Card from '../Cards/Card.seller'
 import axios from 'axios'
+import api from '../../api.config.js'
 
 const ViewProduct = () => {
   const [products, setProducts] = useState([])
   useEffect(() => {
     try {
       const fetchProducts = async () => {
-        const response = await axios.get('https://ecommerce-app-backend-kyd3.onrender.com/api/products/getProductsBySeller', {
-          // Include cookies in the request
-          withCredentials: true,
-        })
+        // const response = await axios.get('https://ecommerce-app-backend-kyd3.onrender.com/api/products/getProductsBySeller', {
+        //   // Include cookies in the request
+        //   withCredentials: true,
+        // })
+                const response = await api.post('/api/products/getProductsBySeller');
         // console.log(response.data.data)
         // console.log(Array.isArray(response.data.data))
         setProducts(response.data.data)
