@@ -35,29 +35,29 @@ const addProduct = asyncHandler(async (req, res) => {
     // get product images from frontend
 
     let imageUrlPath;
-    // let imagePath=[];
+    let imagePath=[];
 
-    // if (req.files && Array.isArray(req.files.imageUrl) && req.files.imageUrl.length > 0) {
-    //     for (let i = 0; i < req.files.imageUrl.length; i++) {
-    //         imageUrlPath = req.files.imageUrl[i].path;
-    //         const imageUrl = await uploadOnCloudinary(imageUrlPath);
-    //         if (!imageUrl) {
-    //             throw new ApiError(500, "Image upload failed 1");
-    //         }
-    //         imagePath[i] = imageUrl.url;
-    //     }
-    // }
-    const imagePath = [];
-
-    if (req.files?.imageUrl?.length) {
-        for (const file of req.files.imageUrl) {
-            const result = await uploadOnCloudinary(file.buffer);
-            if (!result?.url) {
-                throw new ApiError(500, "Image upload failed");
+    if (req.files && Array.isArray(req.files.imageUrl) && req.files.imageUrl.length > 0) {
+        for (let i = 0; i < req.files.imageUrl.length; i++) {
+            imageUrlPath = req.files.imageUrl[i].path;
+            const imageUrl = await uploadOnCloudinary(imageUrlPath);
+            if (!imageUrl) {
+                throw new ApiError(500, "Image upload failed 1");
             }
-            imagePath.push(result.url);
+            imagePath[i] = imageUrl.url;
         }
     }
+    // const imagePath = [];
+
+    // if (req.files?.imageUrl?.length) {
+    //     for (const file of req.files.imageUrl) {
+    //         const result = await uploadOnCloudinary(file.buffer);
+    //         if (!result?.url) {
+    //             throw new ApiError(500, "Image upload failed");
+    //         }
+    //         imagePath.push(result.url);
+    //     }
+    // }
 
 
     if (!imagePath) {
