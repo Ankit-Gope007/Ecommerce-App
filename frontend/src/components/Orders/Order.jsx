@@ -15,7 +15,7 @@ function Order() {
       try {
         setLoading(true);
         // const response = await axios.get('https://ecommerce-app-backend-kyd3.onrender.com/api/orders/getOrders',
-         const response = await api.post('/api/orders/getOrders');
+         const response = await api.get('/api/orders/getOrders');
          
         setOrders(response.data.message[0]);
         setProducts(response.data.message[0].products);
