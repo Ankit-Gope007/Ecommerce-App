@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import api from '../../api.config.js'
 
 
 
@@ -9,14 +10,21 @@ function B_Header() {
   const Logout = async () => {
     const userConfirm = confirm("Are you sure you want to logout?");
     if (userConfirm) {
-      const token = localStorage.getItem('accessToken')
-      console.log("This is the token :",token);
-      const response = await axios.post("https://ecommerce-app-backend-kyd3.onrender.com/api/users/logoutUser", {
-        withCredentials: true,
-    headers: {
-        'Authorization': `Bearer ${token}`
+    //   const token = localStorage.getItem('accessToken')
+    //   console.log("This is the token :",token);
+    //   const response = await axios.post("https://ecommerce-app-backend-kyd3.onrender.com/api/users/logoutUser", {
+    //     withCredentials: true,
+    // headers: {
+    //     'Authorization': `Bearer ${token}`
+    // }
+    //   });
+        try {
+        await api.post('/api/users/logoutUser');
+        localStorage.removeItem('accessToken');
+        // handle successful logout (e.g., redirect)
+    } catch (error) {
+        console.error("Logout failed:", error);
     }
-      });
       if (response.status === 200) {
         navigate("/");
       } else {
