@@ -3,15 +3,17 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import Card_Buyer from '../Cards/Card.Buyer'
+import api from '../../api.config.js'
 
 const Books_Pages = () => {
     const [products, setProducts] = useState([])
     useEffect(() => {
         try {
             const fetchProducts = async () => {
-                const response = await axios.get(`https://ecommerce-app-backend-kyd3.onrender.com/api/products/getProductsByCategory/Books`)
+                // const response = await axios.get(`https://ecommerce-app-backend-kyd3.onrender.com/api/products/getProductsByCategory/Books`)
                 // console.log(response.data.message)
                 // console.log(Array.isArray(response.data.message))
+                const response = await api.post('/api/products/getProductsByCategory/Books');
                 setProducts(response.data.message)
             }
             fetchProducts()
