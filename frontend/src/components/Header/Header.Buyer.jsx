@@ -18,18 +18,18 @@ function B_Header() {
     //     'Authorization': `Bearer ${token}`
     // }
     //   });
-        try {
+      try {
         const response = await api.post('/api/users/logoutUser');
         localStorage.removeItem('accessToken');
-                if (response.status === 200) {
-        navigate("/");
-      } else {
-        alert("Error logging out. Please try again.");
-      }
-    }
+        if (response.status === 200) {
+          navigate("/");
+        } else {
+          alert("Error logging out. Please try again.");
+        }
+      
         // handle successful logout (e.g., redirect)
     } catch (error) {
-        console.error("Logout failed:", error);
+      console.error("Logout failed:", error);
     }
 
 
