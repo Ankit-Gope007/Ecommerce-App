@@ -20,11 +20,7 @@ const upload = multer({ storage: multer.memoryStorage() });
 const router = Router();
 
 
-router.route('/addProduct').post(
-      verifyJWT,
- upload.fields([{ name: 'imageUrl', maxCount: 4 }]),
-  
-    addProduct)
+router.route('/addProduct').post(verifyJWT,upload.fields([{ name: 'imageUrl', maxCount: 4 }]),addProduct)
 router.route('/deleteProduct/:id').delete(deleteProduct)
 router.route('/updateProduct/:id').patch(updateProduct)
 router.route('/getAllProducts').get(getAllProducts)
