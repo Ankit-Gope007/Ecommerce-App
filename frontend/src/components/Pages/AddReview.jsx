@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useParams, useNavigate } from 'react-router-dom'
+import api from '../../api.config.js'
 
 
 const AddReview = () => {
@@ -26,11 +27,14 @@ const AddReview = () => {
         setLoading(true);
     
         try {
-            const response = await axios.post(
-                `https://ecommerce-app-backend-kyd3.onrender.com/api/reviews/addReview/${product}`, 
-                { rating: formData.rating, comment: formData.comment },
-                { withCredentials: true }
-            );
+            // const response = await axios.post(
+            //     `https://ecommerce-app-backend-kyd3.onrender.com/api/reviews/addReview/${product}`, 
+            //     { rating: formData.rating, comment: formData.comment },
+            //     { withCredentials: true }
+            // );
+            const response = await api.post('/api/reviews/addReview/${product}',
+                                            { rating: formData.rating, comment: formData.comment },
+                                            { withCredentials: true });
             console.log('Review added successfully:', response.data);
             alert('Review added successfully');
             navigate(`/buyer/product/${product}`);
