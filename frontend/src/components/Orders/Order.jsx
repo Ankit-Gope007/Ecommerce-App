@@ -2,6 +2,7 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import api from '../../api.config.js'
 
 function Order() {
   const [loading, setLoading] = useState(false);
@@ -13,7 +14,8 @@ function Order() {
     const fetchOrders = async () => {
       try {
         setLoading(true);
-        const response = await axios.get('https://ecommerce-app-backend-kyd3.onrender.com/api/orders/getOrders',
+        // const response = await axios.get('https://ecommerce-app-backend-kyd3.onrender.com/api/orders/getOrders',
+         const response = await api.post('/api/orders/getOrders');
           { withCredentials: true }
         );
         setOrders(response.data.message[0]);
