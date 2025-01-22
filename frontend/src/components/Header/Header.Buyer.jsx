@@ -26,12 +26,12 @@ function B_Header() {
         } else {
           alert("Error logging out. Please try again.");
         }
-      }
+      
         // handle successful logout (e.g., redirect)
     } catch (error) {
       console.error("Logout failed:", error);
     }
-
+  }
 
   };
   return (
