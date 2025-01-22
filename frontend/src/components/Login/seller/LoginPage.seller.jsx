@@ -23,6 +23,8 @@ const  S_NewLoginPage = ()=>{
 
         try {
             const response = await axios.post('https://ecommerce-app-backend-kyd3.onrender.com/api/users/loginUser', formData);
+            localStorage.setItem('accessToken', response.data.data.accessToken);
+            console.log("From Local Storage",localStorage.getItem('accessToken'));
             console.log(response.data.data);
             alert("User logged in successfully");
             navigate("/seller");
