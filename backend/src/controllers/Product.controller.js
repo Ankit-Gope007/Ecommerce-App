@@ -47,22 +47,17 @@ const addProduct = asyncHandler(async (req, res) => {
     //         imagePath[i] = imageUrl.url;
     //     }
     // }
-     const imagePath = [];
+    const imagePath = [];
 
     if (req.files?.imageUrl?.length) {
         for (const file of req.files.imageUrl) {
-            const result = await cloudinary.uploader.upload(file.buffer, {
-                folder: "products" // Adjust folder name as needed
-            });
-            
+            const result = await uploadOnCloudinary(file.buffer);
             if (!result?.url) {
                 throw new ApiError(500, "Image upload failed");
             }
             imagePath.push(result.url);
         }
     }
-
-
 
 
     if (!imagePath) {
