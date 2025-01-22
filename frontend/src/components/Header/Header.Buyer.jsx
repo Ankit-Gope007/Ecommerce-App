@@ -19,7 +19,7 @@ function B_Header() {
     // }
     //   });
         try {
-        await api.post('/api/users/logoutUser');
+        response = await api.post('/api/users/logoutUser');
         localStorage.removeItem('accessToken');
         // handle successful logout (e.g., redirect)
     } catch (error) {
