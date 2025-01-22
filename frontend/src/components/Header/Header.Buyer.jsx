@@ -21,16 +21,17 @@ function B_Header() {
         try {
         const response = await api.post('/api/users/logoutUser');
         localStorage.removeItem('accessToken');
-        // handle successful logout (e.g., redirect)
-    } catch (error) {
-        console.error("Logout failed:", error);
-    }
-      if (response.status === 200) {
+                if (response.status === 200) {
         navigate("/");
       } else {
         alert("Error logging out. Please try again.");
       }
     }
+        // handle successful logout (e.g., redirect)
+    } catch (error) {
+        console.error("Logout failed:", error);
+    }
+
 
   };
   return (
