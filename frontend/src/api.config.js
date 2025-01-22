@@ -1,3 +1,4 @@
+import axios from 'axios';
 const api = axios.create({
     baseURL: 'https://ecommerce-app-backend-kyd3.onrender.com',
     withCredentials: true
