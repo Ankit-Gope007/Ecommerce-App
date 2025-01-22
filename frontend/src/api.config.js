@@ -3,14 +3,7 @@ const api = axios.create({
     baseURL: 'https://ecommerce-app-backend-kyd3.onrender.com',
     withCredentials: true
 });
-const apip = axios.create({
-    baseURL: 'https://ecommerce-app-backend-kyd3.onrender.com',
-    withCredentials: true,
-    productData, 
-    headers: {
-            'Content-Type': 'multipart/form-data',
-        }
-});
+
 // Add this interceptor
 api.interceptors.request.use(function (config) {
     const token = localStorage.getItem('accessToken');
@@ -22,4 +15,4 @@ api.interceptors.request.use(function (config) {
     return Promise.reject(error);
 });
 export default api;
-export default apip;
+
