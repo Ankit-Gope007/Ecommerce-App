@@ -12,7 +12,7 @@ const ViewProduct = () => {
         //   // Include cookies in the request
         //   withCredentials: true,
         // })
-                const response = await api.post('/api/products/getProductsBySeller');
+                const response = await api.get('/api/products/getProductsBySeller');
         // console.log(response.data.data)
         // console.log(Array.isArray(response.data.data))
         setProducts(response.data.data)
