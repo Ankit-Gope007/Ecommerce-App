@@ -21,8 +21,9 @@ const router = Router();
 
 
 router.route('/addProduct').post(
+      verifyJWT,
  upload.fields([{ name: 'imageUrl', maxCount: 4 }]),
-    verifyJWT,
+  
     addProduct)
 router.route('/deleteProduct/:id').delete(deleteProduct)
 router.route('/updateProduct/:id').patch(updateProduct)
