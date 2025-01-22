@@ -16,7 +16,7 @@ const S_Header = () => {
             // } else {
             //     alert("Error logging out. Please try again.");
             // }
-                  try {
+      try {
         const response = await api.post('/api/users/logoutUser');
         localStorage.removeItem('accessToken');
         if (response.status === 200) {
