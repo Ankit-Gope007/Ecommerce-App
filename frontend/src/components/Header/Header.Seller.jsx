@@ -1,21 +1,35 @@
 import React from "react";
 import { Link,useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import api from '../../api.config.js'
 
 const S_Header = () => {
     const navigate = useNavigate();
     const Logout = async () => {
         const userConfirm = confirm("Are you sure you want to logout?");
         if (userConfirm){
-            const response = await axios.post("https://ecommerce-app-backend-kyd3.onrender.com/api/users/logoutUser", {
-                withCredentials: true,
-            });
-            if (response.status === 200) {
-                navigate("/seller/login");
-            } else {
-                alert("Error logging out. Please try again.");
-            }
+            // const response = await axios.post("https://ecommerce-app-backend-kyd3.onrender.com/api/users/logoutUser", {
+            //     withCredentials: true,
+            // });
+            // if (response.status === 200) {
+            //     navigate("/seller/login");
+            // } else {
+            //     alert("Error logging out. Please try again.");
+            // }
+                  try {
+        const response = await api.post('/api/users/logoutUser');
+        localStorage.removeItem('accessToken');
+        if (response.status === 200) {
+          navigate("/");
+        } else {
+          alert("Error logging out. Please try again.");
+        }
+      
+        // handle successful logout (e.g., redirect)
+    } catch (error) {
+      console.error("Logout failed:", error);
+    }
+  }
         }
         
     };
