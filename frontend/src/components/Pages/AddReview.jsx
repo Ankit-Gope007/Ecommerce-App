@@ -32,9 +32,7 @@ const AddReview = () => {
             //     { rating: formData.rating, comment: formData.comment },
             //     { withCredentials: true }
             // );
-            const response = await api.post('/api/reviews/addReview/${product}',
-                                            { rating: formData.rating, comment: formData.comment },
-                                            { withCredentials: true });
+            const response = await api.post(`/api/reviews/addReview/${product}`,{ rating: formData.rating, comment: formData.comment });
             console.log('Review added successfully:', response.data);
             alert('Review added successfully');
             navigate(`/buyer/product/${product}`);
