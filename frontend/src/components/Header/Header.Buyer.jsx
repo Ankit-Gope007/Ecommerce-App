@@ -9,11 +9,12 @@ function B_Header() {
   const Logout = async () => {
     const userConfirm = confirm("Are you sure you want to logout?");
     if (userConfirm) {
-      console.log(localStorage.getItem('accessToken'));
+      const token = localStorage.getItem('accessToken')
+      console.log("This is the token :",token);
       const response = await axios.post("https://ecommerce-app-backend-kyd3.onrender.com/api/users/logoutUser", {
         withCredentials: true,
     headers: {
-        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+        'Authorization': `Bearer ${token}`
     }
       });
       if (response.status === 200) {
