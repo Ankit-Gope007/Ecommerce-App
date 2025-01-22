@@ -35,25 +35,35 @@ const addProduct = asyncHandler(async (req, res) => {
     // get product images from frontend
 
     let imageUrlPath;
-    let imagePath=[];
+    // let imagePath=[];
 
-    if (req.files && Array.isArray(req.files.imageUrl) && req.files.imageUrl.length > 0) {
-        for (let i = 0; i < req.files.imageUrl.length; i++) {
-            imageUrlPath = req.files.imageUrl[i].path;
-            const imageUrl = await uploadOnCloudinary(imageUrlPath);
-            if (!imageUrl) {
-                throw new ApiError(500, "Image upload failed 1");
+    // if (req.files && Array.isArray(req.files.imageUrl) && req.files.imageUrl.length > 0) {
+    //     for (let i = 0; i < req.files.imageUrl.length; i++) {
+    //         imageUrlPath = req.files.imageUrl[i].path;
+    //         const imageUrl = await uploadOnCloudinary(imageUrlPath);
+    //         if (!imageUrl) {
+    //             throw new ApiError(500, "Image upload failed 1");
+    //         }
+    //         imagePath[i] = imageUrl.url;
+    //     }
+    // }
+     const imagePath = [];
+
+    if (req.files?.imageUrl?.length) {
+        for (const file of req.files.imageUrl) {
+            const result = await cloudinary.uploader.upload(file.buffer, {
+                folder: "products" // Adjust folder name as needed
+            });
+            
+            if (!result?.url) {
+                throw new ApiError(500, "Image upload failed");
             }
-            imagePath[i] = imageUrl.url;
+            imagePath.push(result.url);
         }
-        // imageUrlPath1 = req.files.imageUrl[0].path;
-        // imageUrlPath2 = req.files.imageUrl[1].path;
-        // imageUrlPath3 = req.files.imageUrl[2].path;
-        // imageUrlPath4 = req.files.imageUrl[3].path;
     }
 
-    // const {imageUrl} = await uploadOnCloudinary(imageUrlPath1, imageUrlPath2, imageUrlPath3, imageUrlPath4);
-    // console.log(imageUrl);
+
+
 
     if (!imagePath) {
         throw new ApiError(500, "Image upload failed 2");
