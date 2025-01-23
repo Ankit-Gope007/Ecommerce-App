@@ -47,12 +47,16 @@ const UpdateProduct = () => {
         e.preventDefault();
         setLoading(true);
         try {
-            await axios.patch(`/api/products/updateProduct/${id}`, formData, {
+            // await axios.patch(`/api/products/updateProduct/${id}`, formData, {
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     withCredentials: true,
+            // });
+            const response = await api.post(`/api/products/updateProduct/${id}`,formData, {
                 headers: {
                     'Content-Type': 'application/json',
-                },
-                withCredentials: true,
-            });
+                }});
             setLoading(false);
             alert('Product updated successfully');
             navigate(`/seller/view-product`);
