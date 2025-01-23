@@ -47,15 +47,30 @@ const addProduct = asyncHandler(async (req, res) => {
     //         imagePath[i] = imageUrl.url;
     //     }
     // }
-    const imagePath = [];
+    // const imagePath = [];
+
+    // if (req.files?.imageUrl?.length) {
+    //     for (const file of req.files.imageUrl) {
+    //         const result = await uploadOnCloudinary(file.buffer);
+    //         if (!result?.url) {
+    //             console.error('Cloudinary upload failed', result);
+    //             throw new ApiError(500, "Image upload failed");
+    //         }
+    //         imagePath.push(result.url);
+    //     }
+    // }
+
+        const imagePath = [];
 
     if (req.files?.imageUrl?.length) {
         for (const file of req.files.imageUrl) {
-            const result = await uploadOnCloudinary(file.buffer);
+            const result = await uploadOnCloudinary(file.buffer, file.originalname);
+            
             if (!result?.url) {
-                console.error('Cloudinary upload failed', result);
+                console.error('Upload failed for', file.originalname);
                 throw new ApiError(500, "Image upload failed");
             }
+            
             imagePath.push(result.url);
         }
     }
