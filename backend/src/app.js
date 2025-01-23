@@ -13,7 +13,7 @@ app.use(cookieParser())
 app.use(cors({
     origin: 'https://ecommerce-app-frontend-9xi0.onrender.com',
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     allowedHeaders: ['Content-Type', 'Authorization'],
     exposedHeaders: ['set-cookie']
 }));
