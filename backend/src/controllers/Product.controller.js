@@ -40,7 +40,7 @@ const addProduct = asyncHandler(async (req, res) => {
     if (req.files && Array.isArray(req.files.imageUrl) && req.files.imageUrl.length > 0) {
         for (let i = 0; i < req.files.imageUrl.length; i++) {
             imageUrlPath = req.files.imageUrl[i].path;
-            const imageUrl = await uploadOnCloudinary((req.files.imageUrl.buffer);
+            const imageUrl = await uploadOnCloudinary(req.files.imageUrl.buffer);
             if (!imageUrl) {
                 throw new ApiError(500, "Image upload failed 1");
             }
