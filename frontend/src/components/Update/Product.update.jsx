@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import api from '../../api.config.js'
 
 const UpdateProduct = () => {
     const navigate = useNavigate();
@@ -18,7 +19,8 @@ const UpdateProduct = () => {
         const fetchProduct = async () => {
             setLoading(true);
             try {
-                const { data } = await axios.get(`https://ecommerce-app-backend-kyd3.onrender.com/api/products/getProductById/${id}`);
+                // const { data } = await axios.get(`https://ecommerce-app-backend-kyd3.onrender.com/api/products/getProductById/${id}`);
+                  const  { data } = await api.get(`/api/products/getProductById/${id}`);
                 setFormData({
                     name: data.name,
                     price: data.price,
