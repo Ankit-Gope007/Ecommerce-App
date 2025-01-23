@@ -12,7 +12,7 @@ const S_Card = ({_id,name,price,description,category,countInStock,imageUrl}) => 
     const deleteProduct = async() => {
             if (confirm('Are you sure you want to delete this product?')) {
                 // await axios.delete(`https://ecommerce-app-backend-blgm.onrender.com/api/products/deleteProduct/${_id}`);
-                const response = await api.delete(`/api/products/deleteProduct/${_id}`);
+                await api.delete(`/api/products/deleteProduct/${_id}`);
                 document.querySelector(`div[data-id="${_id}"]`).remove();
                 location.reload();
             }
