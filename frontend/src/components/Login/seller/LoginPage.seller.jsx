@@ -100,10 +100,10 @@ const  S_NewLoginPage = ()=>{
 
 
                 {/* <!-- Register Link --> */}
-                <p className="mt-6 text-center text-sm text-gray-600">
+{/*                 <p className="mt-6 text-center text-sm text-gray-600">
                     Don't have an account?
                     <a href="registerAccount" className="font-medium text-indigo-600 hover:text-indigo-500">Sign Up</a>
-                </p>
+                </p> */}
             </div>
         </div>
     )
