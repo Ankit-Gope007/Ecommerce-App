@@ -13,7 +13,9 @@ const S_Card = ({_id,name,price,description,category,countInStock,imageUrl}) => 
             if (confirm('Are you sure you want to delete this product?')) {
                 // await axios.delete(`https://ecommerce-app-backend-blgm.onrender.com/api/products/deleteProduct/${_id}`);
                 await api.delete(`/api/products/deleteProduct/${_id}`);
+                console.log ("Deleted Product 1")
                 document.querySelector(`div[data-id="${_id}"]`).remove();
+                console.log ("Deleted Product 2")
                 location.reload();
             }
         };
