@@ -53,7 +53,7 @@ const UpdateProduct = () => {
             //     },
             //     withCredentials: true,
             // });
-            const response = await api.post(`/api/products/updateProduct/${id}`,formData, {
+            await api.post(`/api/products/updateProduct/${id}`,formData, {
                 headers: {
                     'Content-Type': 'application/json',
                 }});
