@@ -8,7 +8,7 @@ This was my **first full-stack app**, and I learned *more building it than watch
 
 ## 🚀 Live Demo
 
-👉 [Check out ShopEase here](https://your-deployed-link.com)
+👉 [Check out ShopEase here]([https://your-deployed-link.com](https://ecommerce-app-frontend-9xi0.onrender.com/))
 
 ---
 
