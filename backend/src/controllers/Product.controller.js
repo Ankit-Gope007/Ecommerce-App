@@ -63,14 +63,18 @@ const addProduct = asyncHandler(async (req, res) => {
         const imagePath = [];
 
     if (req.files?.imageUrl?.length) {
-        for (const file of req.files.imageUrl) {
-            const result = await uploadOnCloudinary(file.buffer, file.originalname);
-            
+        // Upload images in parallel for better performance
+        const uploadPromises = req.files.imageUrl.map(file => 
+            uploadOnCloudinary(file.buffer, file.originalname)
+        );
+        
+        const results = await Promise.all(uploadPromises);
+        
+        for (const result of results) {
             if (!result?.url) {
-                console.error('Upload failed for', file.originalname);
+                console.error('Upload failed');
                 throw new ApiError(500, "Image upload failed");
             }
-            
             imagePath.push(result.url);
         }
     }
@@ -138,21 +142,41 @@ const deleteProduct = asyncHandler(async (req, res) => {
 });
 // get all products
 const getAllProducts = asyncHandler(async (req, res) => {
-    // get all products from database
-    const products = await Product.find({});
+    // Add pagination support for better performance
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+    const skip = (page - 1) * limit;
+
+    // get all products from database with pagination
+    const products = await Product.find({})
+        .limit(limit)
+        .skip(skip)
+        .select('-reviews') // Exclude reviews array to reduce payload size
+        .lean(); // Use lean() for read-only queries (faster)
+
+    // Get total count for pagination info
+    const total = await Product.countDocuments({});
 
     // return success response
     return res
     .status(200)
-    .json(new ApiResponse(200, "All products", products));
+    .json(new ApiResponse(200, "All products", {
+        products,
+        pagination: {
+            page,
+            limit,
+            total,
+            pages: Math.ceil(total / limit)
+        }
+    }));
 });
 // get product by id
 const getProductById = asyncHandler(async (req, res) => {
     // get product id from frontend
     const { id } = req.params;
 
-    // find product by id
-    const product = await Product .findById(id);
+    // find product by id - use lean() for better performance
+    const product = await Product.findById(id).lean();
 
     // return success response
     return res
@@ -165,8 +189,10 @@ const getProductsByCategory = asyncHandler(async (req, res) => {
     // get category from frontend
     const { category } = req.params;
 
-    // find products by category
-    const products = await Product.find({ category });
+    // find products by category with lean() for better performance
+    const products = await Product.find({ category })
+        .select('-reviews') // Exclude reviews to reduce payload
+        .lean();
 
     // return success response
     return res
@@ -178,8 +204,10 @@ const getProductsBySeller = asyncHandler(async (req, res) => {
     // get seller id from frontend
     const  sellerId  = req.user._id;
 
-    // find products by seller id
-    const products = await Product.find ({ seller: sellerId });
+    // find products by seller id with lean() for better performance
+    const products = await Product.find({ seller: sellerId })
+        .select('-reviews') // Exclude reviews to reduce payload
+        .lean();
 
     // return success response
     return res
@@ -191,10 +219,12 @@ const getProductsByPriceRange = asyncHandler(async (req, res) => {
     // get min and max price from frontend
     const { min, max } = req.body;
 
-    // find products by price range
+    // find products by price range with lean() for better performance
     const products = await Product.find({
         price: { $gte: min, $lte: max }
-    });
+    })
+    .select('-reviews') // Exclude reviews to reduce payload
+    .lean();
 
     // return success response
     return res
@@ -206,8 +236,10 @@ const getProductsByRating = asyncHandler(async (req, res) => {
     // get rating from frontend
     const { rating } = req.params;
 
-    // find products by rating
-    const products = await Product.find({ rating});
+    // find products by rating with lean() for better performance
+    const products = await Product.find({ rating})
+        .select('-reviews') // Exclude reviews to reduce payload
+        .lean();
 
     // return success response
     return res

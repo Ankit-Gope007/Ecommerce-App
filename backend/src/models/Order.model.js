@@ -39,4 +39,7 @@ const orderSchema = new mongoose.Schema({
 },
      {timestamps:true});
 
+// Add index for frequently queried user field to improve query performance
+orderSchema.index({ user: 1 });
+
 export const Order = mongoose.model("Order", orderSchema);

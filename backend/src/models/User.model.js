@@ -38,6 +38,8 @@ const userSchema = new Schema({
 }
     , { timestamps: true });
 
+// Add index for role field for faster role-based queries
+userSchema.index({ role: 1 });
 
 
 

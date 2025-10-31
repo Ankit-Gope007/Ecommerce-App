@@ -52,4 +52,11 @@ const productSchema = new mongoose.Schema({
 }
     ,{timestamps:true});
 
+// Add indexes for frequently queried fields to improve query performance
+productSchema.index({ category: 1 });
+productSchema.index({ seller: 1 });
+productSchema.index({ price: 1 });
+productSchema.index({ rating: -1 });
+productSchema.index({ category: 1, price: 1 });
+
 export const Product = mongoose.model("Product", productSchema);

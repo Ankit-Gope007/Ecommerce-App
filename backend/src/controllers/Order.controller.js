@@ -57,13 +57,18 @@ const addToCart = asyncHandler(async (req, res, next) => {
 });
 
 const getOrders = asyncHandler(async (req, res, next) => {
-    const orders = await Order.find({ user: req.user._id }).populate("products.product");
+    // Populate with select to only get needed fields and use lean() for better performance
+    const orders = await Order.find({ user: req.user._id })
+        .populate("products.product", "name price imageUrl")
+        .lean();
     res.status(200).json(new ApiResponse(200, "Orders fetched", orders));
 });
 
 const deleteOrder = asyncHandler(async (req, res, next) => {
     const {productID} = req.params;
-    const order = await Order.findOne({user:req.user._id}).populate("products.product");
+    // Use select to only get needed fields for better performance
+    const order = await Order.findOne({user:req.user._id})
+        .populate("products.product", "price");
     const product = order.products.find(p =>String(p._id) === String(productID));
     if (!product){
         return next(new ApiError(404, "Product not found"));
@@ -75,7 +80,7 @@ const deleteOrder = asyncHandler(async (req, res, next) => {
             $inc: { totalPrice: -product.product.price }, // Adjust totalPrice
         },
         { new: true } // Return the updated document
-    );
+    ).lean();
     res.status(200).json(new ApiResponse(200, "Order deleted", updatedOrder));
 });
 

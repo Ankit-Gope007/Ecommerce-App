@@ -69,7 +69,10 @@ const registerUser = asyncHandler (async(req,res) => {
 })
 
 const getAllRegisteredUser = asyncHandler(async (req,res) => {
-    const user = await User.find({}).select("-password -refreshToken")
+    // Use lean() for read-only queries for better performance
+    const user = await User.find({})
+        .select("-password -refreshToken")
+        .lean();
 
     
     return res
@@ -82,7 +85,10 @@ const getAllRegisteredUser = asyncHandler(async (req,res) => {
 // get all by role
 const getByRole = asyncHandler(async (req,res) => {
     const {role} = req.body
-    const user = await User.find({role}).select("-password -refreshToken")
+    // Use lean() for read-only queries for better performance
+    const user = await User.find({role})
+        .select("-password -refreshToken")
+        .lean();
 
     return res
     .status(200)
@@ -222,9 +228,11 @@ const updatePassword = asyncHandler(async(req,res)=>{
 
 })
 // get current user
-
 const getCurrentUser = asyncHandler(async(req,res)=>{
-    const user = await User.findById(req.user._id).select("-password -refreshToken")
+    // Use lean() for read-only queries for better performance
+    const user = await User.findById(req.user._id)
+        .select("-password -refreshToken")
+        .lean();
     return res
     .status(200)
     .json(

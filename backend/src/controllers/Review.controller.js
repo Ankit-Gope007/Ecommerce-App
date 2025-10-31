@@ -86,7 +86,11 @@ const getReviews = asyncHandler(async (req, res) => {
         throw new ApiError(404, "Product not found");
     }
 
-    const reviews = await Review.find({product:product}).populate("user");
+    // Use lean() and select only needed fields for better performance
+    const reviews = await Review.find({product:product})
+        .populate("user", "name")
+        .limit(100) // Add a reasonable limit to prevent large result sets
+        .lean();
     return res.status(200).json(new ApiResponse(200, "Reviews fetched successfully", reviews));
 });
 
