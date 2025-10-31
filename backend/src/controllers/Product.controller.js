@@ -142,33 +142,27 @@ const deleteProduct = asyncHandler(async (req, res) => {
 });
 // get all products
 const getAllProducts = asyncHandler(async (req, res) => {
-    // Add pagination support for better performance
-    const page = parseInt(req.query.page) || 1;
-    const limit = parseInt(req.query.limit) || 10;
-    const skip = (page - 1) * limit;
-
-    // get all products from database with pagination
-    const products = await Product.find({})
-        .limit(limit)
-        .skip(skip)
+    // Add optional pagination support for better performance (backward compatible)
+    const page = parseInt(req.query.page);
+    const limit = parseInt(req.query.limit);
+    
+    let query = Product.find({})
         .select('-reviews') // Exclude reviews array to reduce payload size
         .lean(); // Use lean() for read-only queries (faster)
+    
+    // Only apply pagination if page and limit are provided
+    if (page && limit) {
+        const skip = (page - 1) * limit;
+        query = query.limit(limit).skip(skip);
+    }
 
-    // Get total count for pagination info
-    const total = await Product.countDocuments({});
+    // get all products from database
+    const products = await query;
 
-    // return success response
+    // return success response (maintain backward compatibility)
     return res
     .status(200)
-    .json(new ApiResponse(200, "All products", {
-        products,
-        pagination: {
-            page,
-            limit,
-            total,
-            pages: Math.ceil(total / limit)
-        }
-    }));
+    .json(new ApiResponse(200, "All products", products));
 });
 // get product by id
 const getProductById = asyncHandler(async (req, res) => {

@@ -80,7 +80,7 @@ const deleteOrder = asyncHandler(async (req, res, next) => {
             $inc: { totalPrice: -product.product.price }, // Adjust totalPrice
         },
         { new: true } // Return the updated document
-    ).lean();
+    );
     res.status(200).json(new ApiResponse(200, "Order deleted", updatedOrder));
 });
 
