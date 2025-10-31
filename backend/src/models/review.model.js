@@ -22,4 +22,9 @@ const reviewSchema = new mongoose.Schema({
 },
      {timestamps:true});
 
+// Add indexes for frequently queried fields to improve query performance
+reviewSchema.index({ product: 1 });
+reviewSchema.index({ user: 1 });
+reviewSchema.index({ product: 1, user: 1 });
+
 export const Review = mongoose.model("Review", reviewSchema);
