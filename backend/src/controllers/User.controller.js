@@ -85,6 +85,13 @@ const getAllRegisteredUser = asyncHandler(async (req,res) => {
 // get all by role
 const getByRole = asyncHandler(async (req,res) => {
     const {role} = req.body
+    
+    // Validate role to prevent NoSQL injection
+    const validRoles = ['buyer', 'seller'];
+    if (!role || !validRoles.includes(role)) {
+        throw new ApiError(400, "Invalid role. Must be 'buyer' or 'seller'");
+    }
+    
     // Use lean() for read-only queries for better performance
     const user = await User.find({role})
         .select("-password -refreshToken")
